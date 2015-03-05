@@ -1,30 +1,32 @@
 package com.cashwerkz.challenge;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
-public class StringArrayBuilder {
+public class StringArrayBuilder extends AbstractStringArrayBuilder{
 
-	private List<String> stringArray;
+	private List<String> stringList;
 	
-	
-	public static class Builder{
-		
-		private List<String> stringArray;
-		
-		public void addStringToArray(String string){
-			stringArray.add(string);
-		}
-		
-		
-		
-		
-	}
-
-
-	public String[] build() {
-		// TODO Auto-generated method stub
-		return null;
+	public StringArrayBuilder(){
+		stringList = new ArrayList<String>();
 	}
 	
+	public StringArrayBuilder addToArray(String string){
+		stringList.add(string);
+		return this;
+	}
+	
+	public String[] build(){
+		return build(stringList, Sorter.ASC);
+	}
+	
+	public String[] build(Comparator<String> comparator){
+		return build(stringList, Sorter.CUSTOM, comparator);
+	}
+	
+	public String[] build(Sorter sortBy){
+		return build(stringList, sortBy);
+	}	
 	
 }
