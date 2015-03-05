@@ -26,11 +26,11 @@ public class StringArrayBuilderTest {
 	
 	@Before
 	public void setUp(){
-		test1 = "TEST1"; 
-		test2 = "TEST2"; 
-		test3 = "TEST3";
-		test4 = "TEST4";
-		test5 = "TEST5";
+		test1 = "America"; 
+		test2 = "California"; 
+		test3 = "Japan";
+		test4 = "Philippines";
+		test5 = "Uruguay";
 		builder = new StringArrayBuilder();
 		evenBuilder = new StringArrayEvenBuilder();
 	}
@@ -57,9 +57,21 @@ public class StringArrayBuilderTest {
 		assertEquals(test4, result[3]);
 		assertEquals(test5, result[4]);
 		
+		
 		exception.expect(ArrayIndexOutOfBoundsException.class);
 		@SuppressWarnings("unused")
 		String test6 = result[5];
+		
+		builder.addToArray("Denmark");
+		result = builder.build();
+		
+		assertEquals(test1, result[0]);
+		assertEquals(test2, result[1]);
+		assertEquals("Denmark", result[2]);
+		assertEquals(test3, result[3]);
+		assertEquals(test4, result[4]);
+		assertEquals(test5, result[5]);
+		
 	}
 	
 	@Test
@@ -101,11 +113,11 @@ public class StringArrayBuilderTest {
 	
 	@Test
 	public void testAddStringsToArrayAndBuildWithCustomComparator(){
-		test1 = "C";
+		test1 = "b";
 		test2 = "A";
-		test3 = "B";
+		test3 = "C";
 		test4 = "a";
-		test5 = "b";
+		test5 = "B";
 		
 		builder.addToArray(test1);
 		builder.addToArray(test2);
@@ -129,12 +141,12 @@ public class StringArrayBuilderTest {
 				return obj1.toLowerCase().compareTo(obj2.toLowerCase()) ;
 			}
 		});
-		
+		//A, a, b, B, C
 		assertEquals(test2, result[0]);
 		assertEquals(test4, result[1]);
-		assertEquals(test3, result[2]);
+		assertEquals(test1, result[2]);
 		assertEquals(test5, result[3]);
-		assertEquals(test1, result[4]);
+		assertEquals(test3, result[4]);
 	}
 	
 	@Test

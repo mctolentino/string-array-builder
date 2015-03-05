@@ -34,14 +34,18 @@ public abstract class AbstractStringArrayBuilder {
 	
 	protected List<String> sortList(List<String> stringList, Sorter sortBy, Comparator<String> comparator){
 		
-		if( sortBy == Sorter.ASC){
+		switch (sortBy) {
+		case ASC: 
 			Collections.sort(stringList);
-		}else if (sortBy == Sorter.DESC){
+			break;
+		case DESC: 
 			Collections.sort(stringList, Collections.reverseOrder());
-		}else if( sortBy == Sorter.FIFO){
-			// no op, convert to array the order it was inserted
-		}else if ( sortBy == Sorter.CUSTOM ){
+			break;
+		case FIFO: 
+			break;
+		case CUSTOM: 
 			Collections.sort(stringList, comparator);
+			break;
 		}
 		
 		return stringList;
